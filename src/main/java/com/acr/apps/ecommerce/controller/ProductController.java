@@ -16,7 +16,6 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 @RequestMapping("/products")
 public class ProductController {
-
     @Autowired
     private ProductService productService;
 
@@ -25,5 +24,4 @@ public class ProductController {
         List<Product> products = this.productService.getAll();
         return ResponseEntity.ok( products );
     }
-
 }
