@@ -63,6 +63,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Product> findByStatus(StatusEnum status) {
+        return this.productRepository.findByStatus(status);
+    }
+
+    @Override
     public Optional<Product> update(ProductDto productDto) {
         try {
             Product toUpdate = this.productRepository.getById( productDto.getId() );

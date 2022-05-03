@@ -3,6 +3,7 @@ package com.acr.apps.ecommerce.controller;
 import com.acr.apps.ecommerce.dto.ProductDto;
 import com.acr.apps.ecommerce.dto.ResponseDto;
 import com.acr.apps.ecommerce.entity.Product;
+import com.acr.apps.ecommerce.enums.StatusEnum;
 import com.acr.apps.ecommerce.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,7 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<List<Product>> getAll(){
-        List<Product> products = this.productService.getAll();
+        List<Product> products = this.productService.findByStatus( StatusEnum.CREATED );
         return ResponseEntity.ok( products );
     }
 
