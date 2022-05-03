@@ -25,9 +25,18 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ResponseDto> save(@RequestBody ProductDto producto) {
+    public ResponseEntity<ResponseDto> save(@RequestBody ProductDto product) {
         ResponseDto response = new ResponseDto(null, "Registro exitoso...");
-        System.out.println(producto);
+        this.productService.save(product);
         return new ResponseEntity( response,  HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ResponseDto> delete(@PathVariable Long id) {
+        this.productService.delete(id);
+        return new ResponseEntity(
+                new ResponseDto(null, "Registro eliminado"),
+                HttpStatus.OK
+        );
     }
 }
