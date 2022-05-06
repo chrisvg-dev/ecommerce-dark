@@ -3,6 +3,7 @@ package com.acr.apps.ecommerce.controller;
 import com.acr.apps.ecommerce.dto.ProductDto;
 import com.acr.apps.ecommerce.dto.ResponseDto;
 import com.acr.apps.ecommerce.entity.Product;
+import com.acr.apps.ecommerce.enums.StatusEnum;
 import com.acr.apps.ecommerce.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,14 +21,23 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<List<Product>> getAll(){
-        List<Product> products = this.productService.getAll();
+        List<Product> products = this.productService.findByStatus(StatusEnum.CREATED);
         return ResponseEntity.ok( products );
     }
 
     @PostMapping
-    public ResponseEntity<ResponseDto> save(@RequestBody ProductDto producto) {
+    public ResponseEntity<ResponseDto> save(@RequestBody ProductDto product) {
         ResponseDto response = new ResponseDto(null, "Registro exitoso...");
-        System.out.println(producto);
+        this.productService.save(product);
         return new ResponseEntity( response,  HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ResponseDto> delete(@PathVariable Long id) {
+        this.productService.delete(id);
+        return new ResponseEntity(
+                new ResponseDto(null, "Registro eliminado"),
+                HttpStatus.OK
+        );
     }
 }
