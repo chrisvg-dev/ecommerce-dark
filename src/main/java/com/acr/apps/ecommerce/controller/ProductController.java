@@ -21,7 +21,8 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<List<Product>> getAll(){
-        List<Product> products = this.productService.findByStatus(StatusEnum.CREATED);
+        List<Product> products = this.productService.findByStatus( StatusEnum.CREATED );
+
         return ResponseEntity.ok( products );
     }
 

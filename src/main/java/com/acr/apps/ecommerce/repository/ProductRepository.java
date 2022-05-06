@@ -11,9 +11,8 @@ import java.util.List;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-
     List<Product> findByStatus(StatusEnum status);
 
-    @Query("SELECT p FROM Product p WHERE status = :status")
+    @Query("SELECT p FROM Product p WHERE p.status = :status")
     List<Product> findAll(@Param("status") StatusEnum ...status);
 }
