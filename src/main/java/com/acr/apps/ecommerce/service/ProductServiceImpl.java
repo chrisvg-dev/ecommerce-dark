@@ -52,10 +52,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Optional<Product> delete(Long id) {
-        Product toDelete = this.productRepository.getById( id );
+        Product toDelete = this.productRepository.findById(id).orElse(null);
 
         if (toDelete == null) {
-            return Optional.empty();
+            return null;
         }
 
         toDelete.setStatus( StatusEnum.DELETED );
