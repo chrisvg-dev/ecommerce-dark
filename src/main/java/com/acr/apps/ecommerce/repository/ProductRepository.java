@@ -8,11 +8,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByStatus(StatusEnum status);
-
     @Query("SELECT p FROM Product p WHERE p.status = :status")
     List<Product> findAll(@Param("status") StatusEnum ...status);
+
+    Optional<Product> findById(Long id);
 }

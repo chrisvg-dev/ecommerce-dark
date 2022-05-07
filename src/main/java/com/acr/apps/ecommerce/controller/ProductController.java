@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -35,10 +36,41 @@ public class ProductController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<ResponseDto> delete(@PathVariable Long id) {
-        this.productService.delete(id);
+        if ( id < 1) {
+            return new ResponseEntity(
+                    new ResponseDto(401, "Debe ingresar un id válido"),
+                    HttpStatus.NOT_FOUND
+            );
+        }
+        Optional<Product> opt = this.productService.delete(id);
+        if (opt == null) {
+            return new ResponseEntity(
+                    new ResponseDto(null, "ERROR AL INTENTAR ELIMINAR"),
+                    HttpStatus.BAD_REQUEST
+            );
+        }
         return new ResponseEntity(
                 new ResponseDto(null, "Registro eliminado"),
                 HttpStatus.OK
         );
+    }
+
+    @PutMapping
+    public ResponseEntity<ResponseDto> update(@RequestBody ProductDto product) {
+        if ( product.getId() < 1 || product.getId() == null) {
+            return new ResponseEntity(
+                    new ResponseDto(401, "Debe ingresar un id válido"),
+                    HttpStatus.NOT_FOUND
+            );
+        }
+
+        ResponseDto response = null;
+        Product updated = this.productService.update(product).get();
+        if ( updated == null ) {
+            response = new ResponseDto(null, "No se encontró el registro...");
+        } else {
+            response = new ResponseDto(null, "Registro actualizado");
+        }
+        return new ResponseEntity( response,  HttpStatus.OK);
     }
 }
