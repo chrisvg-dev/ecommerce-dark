@@ -14,16 +14,15 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Category {
+public class ProductPost {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    private String detail;
+    private String description;
 
     @Enumerated(EnumType.STRING)
     private StatusEnum status;
 
     private LocalDateTime createdAt;
-
-
 }
