@@ -23,4 +23,8 @@ public class Comment {
     @Enumerated(EnumType.STRING)
     private StatusEnum status;
     private LocalDateTime createdAt;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "fk_productPost", referencedColumnName = "id")
+    private ProductPost productPost;
 }

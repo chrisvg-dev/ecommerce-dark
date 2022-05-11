@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -24,6 +26,4 @@ public class Category {
     private StatusEnum status;
 
     private LocalDateTime createdAt;
-
-
 }

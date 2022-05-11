@@ -25,4 +25,8 @@ public class ProductPost {
     private StatusEnum status;
 
     private LocalDateTime createdAt;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "fk_product", referencedColumnName = "id")
+    private Product product;
 }
