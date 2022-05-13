@@ -4,12 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -26,4 +25,11 @@ public class Sale {
     private String payDate;
     private LocalDate saleDate;
     private LocalDateTime createdAt;
+
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "sale_product",
+            joinColumns = {@JoinColumn(name = "fk_saleId", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "fk_productId", referencedColumnName = "id") })
+    private List<Product> products;
 }
