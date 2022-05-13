@@ -17,7 +17,7 @@ import java.util.List;
 public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer userId;
+    private Integer id;
     private Float total;
     private Float subTotal;
     private Float iva;

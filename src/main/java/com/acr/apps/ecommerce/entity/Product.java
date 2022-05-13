@@ -38,7 +38,7 @@ public class Product {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "product_category",
-            joinColumns = {@JoinColumn(name = "product_id")},
-            inverseJoinColumns = {@JoinColumn(name = "category_id") })
-    private List<Product> products = new ArrayList<>();
+            joinColumns = {@JoinColumn(name = "fk_productId", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "fk_catId", referencedColumnName = "id") })
+    private List<Category> categories;
 }

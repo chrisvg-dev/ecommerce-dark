@@ -54,7 +54,7 @@ public class ProductServiceImpl implements ProductService {
     public Optional<Product> delete(Long id) {
         Product toDelete = this.productRepository.findById(id).orElse(null);
 
-        if (toDelete == null) {
+        if (toDelete == null || toDelete.getStatus().equals( StatusEnum.DELETED )) {
             return null;
         }
 
